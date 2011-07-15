@@ -19,9 +19,15 @@
 	android:id="@+id/textView3" 
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content"></TextView>
-<Button android:text="Print" android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+    <Button 
+    	android:text="@string/print" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/button1"></Button>
+    <Button android:text="@string/clear" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/button2"></Button>
+</LinearLayout>
 <TextView 
-	android:text="TextView" 
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content" android:id="@+id/log"></TextView>
 </LinearLayout>

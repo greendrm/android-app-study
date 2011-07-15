@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, HelloWorldActivity!</string>
     <string name="app_name">HelloWorld</string>
+    <string name="balance">Balance</string>
+    <string name="print">Print</string>
+    <string name="clear">Clear</string>
 </resources>

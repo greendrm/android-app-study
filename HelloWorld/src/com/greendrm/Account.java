@@ -4,8 +4,10 @@ public class Account {
 	String accountNo;
 	String ownerName;
 	private int balance;
-//	Account() {
-//	}
+	
+	Account() {
+	}
+	
 	Account(String accountNo, String ownerName, int balance) { 
 		this.accountNo = accountNo;
 		this.ownerName = ownerName;
