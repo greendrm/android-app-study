@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, HelloWorldActivity!</string>
+    <string name="app_name">HelloWorld</string>
+    <string name="balance">예금 잔액</string>
+    <string name="print">출력</string>
+    <string name="clear">삭제</string>
+</resources>
