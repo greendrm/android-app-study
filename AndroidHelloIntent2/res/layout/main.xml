@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+    <TextView android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:id="@+id/textView2" android:text="@string/search"></TextView>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/editSearch">
+        <requestFocus></requestFocus>
+    </EditText>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonSearch" android:text="Google Search"></Button>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonWeb" android:text="@string/web"></Button>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonCall" android:text="@string/call"></Button>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonMap" android:text="@string/map"></Button>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonSecond" android:text="@string/second"></Button>
+</LinearLayout>

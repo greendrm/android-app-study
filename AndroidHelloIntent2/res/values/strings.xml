@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, AndroidHelloIntent2Activity!</string>
+    <string name="app_name">AndroidHelloIntent2</string>
+    <string name="search">Input the string to search :</string>
+    <string name="call">Call</string>
+    <string name="map">Map</string>
+    <string name="second">Second Activity</string>
+    <string name="secondView">This is the Second Activity</string>
+    <string name="web">Web</string>
+    <string name="sendmessage">Send message</string>
+</resources>
