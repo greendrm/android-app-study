@@ -1,6 +1,8 @@
 # files
+*.class
 
 # directories
 .metadata
 gen
 bin
+.svn
