@@ -2,7 +2,10 @@ package com.greendrm.hellointent2;
 
 import android.app.Activity;
 import android.app.SearchManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,64 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class AndroidHelloIntent2Activity extends Activity implements OnClickListener {
-	final String TAG = "HELLOINTENT2/Main";
+	public static final String TAG = "HELLOINTENT2/Main";
 	public static final int REQ_SEC = 1;
 	
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-		Log.d(TAG, "onStart()");
-	}
-
-
-
-	@Override
-	protected void onRestart() {
-		// TODO Auto-generated method stub
-		super.onRestart();
-		Log.d(TAG, "onRestart()");
-	}
-
-
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		Log.d(TAG,"onResume()");
-	}
-
-
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		Log.d(TAG,"onPause()");
-//		Toast.makeText(getApplicationContext(), "Main/onPause", Toast.LENGTH_SHORT).show();
-	}
-
-
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		Log.d(TAG, "onStop()");
-	}
-
-
-
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		Log.d(TAG, "onDestory()");
-	}
-
-
-
 	/** Called when the activity is first created. */
 	EditText editSearch;
 	Button buttonSearch;
@@ -116,6 +64,20 @@ public class AndroidHelloIntent2Activity extends Activity implements OnClickList
         		startActivityForResult(intent, REQ_SEC);
         	}
         });
+        
+//        BroadcastReceiver rcvSMS = new BroadcastReceiver() {
+//
+//        	@Override
+//        	public void onReceive(Context context, Intent intent) {
+//        		if(intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
+//        			Toast.makeText( context, "Received SMS", Toast.LENGTH_LONG).show();
+//        			Log.d(TAG, "Received SMS");
+//        		}
+//        	}
+//        	
+//        };
+//        
+//        registerReceiver(rcvSMS, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
     }
     
     @Override
