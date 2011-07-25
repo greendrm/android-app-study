@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
+    android:weightSum="1">
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
@@ -27,7 +27,5 @@
     	android:id="@+id/button1"></Button>
     <Button android:text="@string/clear" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/button2"></Button>
 </LinearLayout>
-<TextView 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" android:id="@+id/log"></TextView>
+<TextView android:layout_height="wrap_content" android:id="@+id/log" android:layout_width="130dp" android:layout_weight="0.06"></TextView>
 </LinearLayout>
