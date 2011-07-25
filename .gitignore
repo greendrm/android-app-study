@@ -2,3 +2,5 @@
 
 # directories
 .metadata
+gen
+bin
