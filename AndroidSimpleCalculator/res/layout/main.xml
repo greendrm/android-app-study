@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="fill_parent"
+    android:layout_width="match_parent">
+    <EditText android:layout_width="match_parent" android:id="@+id/editText1" android:layout_height="wrap_content" android:cursorVisible="false" android:focusableInTouchMode="false" android:focusable="false">
+        <requestFocus></requestFocus>
+    </EditText>
+    <TableLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/tableLayout1">
+        <TableRow android:id="@+id/tableRow1" android:layout_height="wrap_content" android:layout_width="match_parent">
+            <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="1">
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="/" android:layout_height="wrap_content" android:id="@+id/buttonDiv"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="*" android:layout_height="wrap_content" android:id="@+id/buttonMul"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="-" android:layout_height="wrap_content" android:id="@+id/buttonSub"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="+" android:layout_height="wrap_content" android:id="@+id/buttonAdd"></Button>
+            </LinearLayout>
+        </TableRow>
+        <TableRow android:id="@+id/tableRow2" android:layout_height="fill_parent" android:layout_weight="1" android:layout_width="match_parent">
+            <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_weight="1" android:layout_width="match_parent">
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="7" android:layout_height="wrap_content" android:id="@+id/button7"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="8" android:layout_height="wrap_content" android:id="@+id/button8"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="9" android:layout_height="wrap_content" android:id="@+id/button9"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="Clr" android:layout_height="wrap_content" android:id="@+id/buttonClr"></Button>
+            </LinearLayout>
+        </TableRow>
+        <TableRow android:id="@+id/tableRow3" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <LinearLayout android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="match_parent">
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="4" android:layout_height="wrap_content" android:id="@+id/button4"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="5" android:layout_height="wrap_content" android:id="@+id/button5"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="6" android:layout_height="wrap_content" android:id="@+id/button6"></Button>
+                <Button android:id="@+id/button16" android:layout_weight="1" android:layout_width="match_parent" android:text="Button" android:layout_height="wrap_content" android:visibility="invisible"></Button>
+            </LinearLayout>
+        </TableRow>
+        <TableRow android:id="@+id/tableRow4" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <LinearLayout android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="match_parent">
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="1" android:layout_height="wrap_content" android:id="@+id/button1"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="2" android:layout_height="wrap_content" android:id="@+id/button2"></Button>
+                <Button android:layout_weight="1" android:layout_width="match_parent" android:text="3" android:layout_height="wrap_content" android:id="@+id/button3"></Button>
+                <Button android:id="@+id/button17" android:layout_weight="1" android:layout_width="match_parent" android:text="Button" android:layout_height="wrap_content" android:visibility="invisible"></Button>
+            </LinearLayout>
+        </TableRow>
+        <TableRow android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tableRow5" android:layout_weight="1">
+        <LinearLayout android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="match_parent">
+            <LinearLayout android:id="@+id/linearLayout6" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="match_parent">
+                <Button android:text="0" android:layout_height="wrap_content" android:layout_weight="2" android:layout_width="match_parent" android:id="@+id/button0"></Button>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/linearLayout7" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="match_parent">
+                <Button android:text="=" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="match_parent" android:id="@+id/buttonDone"></Button>
+                <Button android:id="@+id/button19" android:text="Button" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="match_parent" android:visibility="invisible"></Button>
+            </LinearLayout>
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

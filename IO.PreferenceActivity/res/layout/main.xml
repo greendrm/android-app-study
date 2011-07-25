@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		>
+	<TextView
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:layout_marginBottom="5dp"
+			android:text="설정 파일에서 다시 값을 읽어 옵니다. 메뉴에서 변경하세요"
+	/>
+	<LinearLayout 
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"	>
+	<TextView 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text="체크박스 아이템: "
+	/>
+	<TextView android:id="@+id/checkbox"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text=""
+	/>
+	</LinearLayout>
+	
+	<LinearLayout 
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"	>
+	<TextView 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text="문장: "
+	/>
+	<TextView android:id="@+id/tx_added"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text=""
+	/>
+	</LinearLayout>
+</LinearLayout>

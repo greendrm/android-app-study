@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Read XML Resource activity" android:id="@+id/textView5"></TextView>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/textView6"></TextView>
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/buttonReadWriteSD" android:onClick="onClickSDcard" android:text="Go to read/write SD card"></Button>
+    
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonStartRecording" android:text="@string/recording"></Button>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonAudio" android:text="@string/audioNo"></Button>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonDelete" android:text="@string/delete"></Button>
+    </LinearLayout>
+</LinearLayout>

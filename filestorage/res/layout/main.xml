@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <CheckBox android:id="@+id/checkBox1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SD Card"></CheckBox>
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout1">
+        <Button android:layout_height="wrap_content" android:text="Save" android:layout_width="wrap_content" android:id="@+id/buttonSave" android:onClick="onClickSave"></Button>
+        <Button android:layout_height="wrap_content" android:text="Load" android:layout_width="wrap_content" android:id="@+id/buttonLoad" android:onClick="onClickLoad"></Button>
+    </LinearLayout>
+    <EditText android:layout_width="match_parent" android:id="@+id/editText1" android:layout_height="fill_parent" android:gravity="top|left">
+        <requestFocus></requestFocus>
+    </EditText>
+</LinearLayout>

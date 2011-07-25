@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<people>
+	<person firstname="a" lastname="kim" />
+	<person firstname="b" lastname="kim" />
+	<person firstname="c" lastname="kim" />
+	<person firstname="d" lastname="kim" />
+	<person firstname="e" lastname="kim" />
+	<person firstname="f" lastname="kim" />
+</people>

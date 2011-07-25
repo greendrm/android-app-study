@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, AndroidHelloServiceActivity!</string>
+    <string name="app_name">AndroidHelloService</string>
+    <string name="servicestart">Start Service</string>
+    <string name="binderService">Binder Service</string>
+    <string name="increment">Increment</string>
+    <string name="servicestop">Stop Service</string>
+    <string name="binderUnbind">Unbind Service</string>
+    <string name="result">Result : </string>
+    <string name="add">Add</string>
+    <string name="sub">Sub</string>
+    <string name="mul">Mul</string>
+    <string name="div">Div</string>
+</resources>

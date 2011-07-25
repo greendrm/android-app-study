@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:id="@+id/layout2" android:clickable="true">
+    <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent">
+        <RadioButton android:id="@+id/radioButton1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="가로"></RadioButton>
+        <RadioButton android:id="@+id/radioButton2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="세로"></RadioButton>
+    </LinearLayout>
+    <RadioButton android:id="@+id/radioButton3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="왼쪽"></RadioButton>
+    <RadioButton android:id="@+id/radioButton4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="가운데"></RadioButton>
+    <RadioButton android:id="@+id/radioButton5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="오른쪽"></RadioButton>
+    
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	>
+	<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="이름: "
+	/>
+	<EditText
+		android:id="@+id/name"  
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:hint="이름을 입력하세요~"
+	    />
+	</TableRow>
+
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	>
+	<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="ID:  "
+	/>
+	<EditText
+		android:id="@+id/stnum"  
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:hint="ID를 입력하세요..."
+	    />
+	</TableRow>
+</TableLayout>

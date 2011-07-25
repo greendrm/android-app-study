@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="font_color">
+		<item>빨강</item>
+		<item>녹색</item>
+		<item>회색</item>
+	</string-array>
+
+	<string-array name="font_color_values">
+		<item>#ffff0000</item>
+	    <item>#ff00ff00</item>
+	    <item>#999999</item>
+	</string-array>
+
+	<string-array name="font_size_values">
+		<item>10</item>
+		<item>12</item>
+		<item>14</item>
+		<item>16</item>
+		<item>18</item>
+		<item>20</item>
+	</string-array>
+</resources>

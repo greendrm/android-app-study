@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:key="preference_root" >
+	<CheckBoxPreference 
+		android:key="checkbox"
+		android:title="체크 여부"
+		android:summary="Check 표시 합니다"
+		android:defaultValue="false" />	
+	<EditTextPreference
+		android:key="newMsg"
+		android:title="새 메시지 입력"
+		android:summary="새 메시지를 입력 합니다" />
+	<PreferenceCategory
+		android:key="category1"
+		android:title="Category 1 제목"
+		android:summary="Category 1에 대한 자세한 설명: 표시 안됨"
+		android:enabled="true" >	
+		<ListPreference
+			android:key="textColor"
+			android:title="텍스트 Color"
+			android:summary="글자 색을 지정합니다"
+			android:entries="@array/font_color"
+			android:entryValues="@array/font_color_values"
+			android:defaultValue="#FFFFFFFF" />
+		<ListPreference
+			android:key="msgSize"
+			android:title="텍스트 폰트 크기"
+			android:summary="글자 크기를 지정합니다"
+			android:entries="@array/font_size_values"
+			android:entryValues="@array/font_size_values"
+			android:defaultValue="12" />
+		<RingtonePreference
+			android:key="Ringtone"
+			android:title="Ringtone 설정"
+			android:showDefault="true"
+			android:showSilent="true"
+			android:ringtoneType="all"
+			android:summary="사용할 Ringtone을 설정 합니다" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:key="category2"	
+		android:title="Category 2 제목" >
+		<PreferenceScreen
+			android:key="sub_pref"
+			android:title="Sub Preferences 가기"
+			android:summary="클릭하면 Sub Preferences가 호출 됩니다" >
+			<CheckBoxPreference 
+				android:key="sub_checkbox"
+				android:title="Sub CheckBox Preference"
+				android:summaryOn="Uncheck하면 Main Preference의 Category2 밑의 요소 비활성화"
+				android:summaryOff="Check하면 Main Preference의 Category2 밑의 요소 활성화" />
+		</PreferenceScreen>	
+	</PreferenceCategory>
+</PreferenceScreen>

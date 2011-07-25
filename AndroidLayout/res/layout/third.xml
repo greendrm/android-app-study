@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:id="@+id/layout3" android:clickable="true" android:weightSum="1">
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_weight="0.03">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge" android:text="URL: " android:layout_centerVertical="true" android:layout_alignParentLeft="true"></TextView>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/editText1" android:layout_centerVertical="true" android:layout_toRightOf="@+id/textView1">
+            <requestFocus></requestFocus>
+        </EditText>
+    </RelativeLayout>
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2" android:layout_weight="0.03">
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/button2" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:text="취소"></Button>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/button1" android:text="확인" android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/button2"></Button>
+    </RelativeLayout>
+    
+</LinearLayout>

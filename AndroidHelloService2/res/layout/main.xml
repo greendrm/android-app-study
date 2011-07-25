@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <Button android:layout_width="match_parent" android:text="@string/binderService" android:layout_height="wrap_content" android:id="@+id/buttonBinder"></Button>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="numberSigned" android:id="@+id/editTextOp1">
+        <requestFocus></requestFocus>
+    </EditText>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="numberSigned" android:id="@+id/editTextOp2"></EditText>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+        <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/textView1" android:text="@string/result"></TextView>
+        <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:id="@+id/textViewResult" android:layout_width="244dp"></TextView>
+    </LinearLayout>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonAdd" android:text="@string/add"></Button>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonSub" android:text="@string/sub"></Button>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonMul" android:text="@string/mul"></Button>
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/buttonDiv" android:text="@string/div"></Button>
+</LinearLayout>

@@ -1,0 +1,3 @@
+java -classpath . a.b.c.d.HelloJava1
+
+javac -d HelloJava1.java
