@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="sdcard: '김도집' 새파일" android:layout_marginTop="5dp" android:layout_marginBottom="5dp"></TextView>
+    <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent">
+        <TextView android:id="@+id/textView2" android:text="제목 : " android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+        <EditText android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/editNewFile"></EditText>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout2" android:layout_width="match_parent" android:orientation="vertical" android:layout_height="fill_parent" android:gravity="bottom" android:weightSum="1">
+        <EditText android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="1" android:id="@+id/editContents" android:gravity="top|left">
+            <requestFocus></requestFocus>
+        </EditText>
+        <Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/buttonDeleteFile" android:text="Delete File"></Button>
+    </LinearLayout>
+    
+</LinearLayout>
