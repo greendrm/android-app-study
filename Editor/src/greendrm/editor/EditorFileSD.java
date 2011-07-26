@@ -12,11 +12,16 @@ public class EditorFileSD extends EditorFile {
 		String state = Environment.getExternalStorageState();
 		if (state.equals(Environment.MEDIA_MOUNTED)) {
 			File dir = Environment.getExternalStorageDirectory();
-			baseDir = dir;
+			if (baseDir == null)
+				baseDir = dir;
 		}
 		else {
 			Log.e(TAG, "No SD Card!");
 		}
 	}
-		
+	
+	public EditorFileSD(String dir) {
+		this();
+		mkDir(dir);
+	}
 }

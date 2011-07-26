@@ -13,7 +13,7 @@
         <EditText android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="1" android:id="@+id/editContents" android:gravity="top|left">
             <requestFocus></requestFocus>
         </EditText>
-        <Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/buttonDeleteFile" android:text="Delete File"></Button>
+        <Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/buttonDeleteFile" android:text="Delete File" android:onClick="onClickDeleteFile"></Button>
     </LinearLayout>
     
 </LinearLayout>
