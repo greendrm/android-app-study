@@ -11,15 +11,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class PlayMp3Activity extends Activity {
-	String TAG = "PlayMp3";
+	private static final String TAG = "PlayMp3";
 	MediaPlayer audio_play = null;
-	String sampleMp3 = 
+	final String sampleMp3 = 
 		"http://www.archive.org/download/SteveJobsSpeechAtStanfordUniversity/SteveJobsSpeech_64kb.mp3";
 	SeekBar seekbar;
+	TextView textviewStart, textviewStop;
 	Thread thread;
 	boolean isPlaying = false;
+	boolean isThreadTerminated = false;
 	
     /** Called when the activity is first created. */
     @Override
@@ -28,6 +31,9 @@ public class PlayMp3Activity extends Activity {
         setContentView(R.layout.main);
         
         seekbar = (SeekBar)findViewById(R.id.seekBar1);
+        textviewStart = (TextView)findViewById(R.id.textViewStart);
+        textviewStop = (TextView)findViewById(R.id.textViewStop);
+        
         UpdateProgress updateProgress = new UpdateProgress();
         thread = new Thread(updateProgress);
         thread.start();
@@ -35,7 +41,16 @@ public class PlayMp3Activity extends Activity {
     
 	@Override
 	protected void onDestroy() {
-		thread.stop();
+		isThreadTerminated = true;
+		if (audio_play != null) {
+			try {
+				audio_play.stop();
+				audio_play.release();
+			}
+			catch (Exception e) {
+				//
+			}
+		}
 		super.onDestroy();
 	}
     
@@ -82,7 +97,7 @@ public class PlayMp3Activity extends Activity {
     			
     		});
     		if (!audio_play.isPlaying()) {
-    			seekbar.setMax(audio_play.getDuration());
+    			setDuratinSeekBar(audio_play.getDuration());
     			audio_play.start();
     			isPlaying = true;
     		}
@@ -99,11 +114,11 @@ public class PlayMp3Activity extends Activity {
     			
     		});
     		try {
-    			afd = getAssets().openFd("three_bears.mp3");
+    			afd = getAssets().openFd("number_song.mp3");
     			audio_play.setDataSource(afd.getFileDescriptor(),
     					afd.getStartOffset(), afd.getLength());
     			audio_play.prepare();
-    			seekbar.setMax(audio_play.getDuration());
+    			setDuratinSeekBar(audio_play.getDuration());
     			audio_play.start();
     			isPlaying = true;
     			afd.close();
@@ -124,7 +139,7 @@ public class PlayMp3Activity extends Activity {
     			
     		});
     		Log.d(TAG, "duration: " + audio_play.getDuration());
-    		seekbar.setMax(audio_play.getDuration());
+    		setDuratinSeekBar(audio_play.getDuration());
     		audio_play.start();
     		isPlaying = true;
     		break;
@@ -134,7 +149,7 @@ public class PlayMp3Activity extends Activity {
     class UpdateProgress implements Runnable {
 		@Override
 		public void run() {
-			while (true) {
+			while (isThreadTerminated != false) {
 				if (audio_play != null) {
 					if (isPlaying) {
 						try {
@@ -158,4 +173,13 @@ public class PlayMp3Activity extends Activity {
 			}
 		}
     }
+    
+    public void setDuratinSeekBar(int duration) {
+    	double sec;
+    	sec = (double)duration / 1000.0;
+    	
+    	seekbar.setMax(duration);
+    	textviewStop.setText(new Double(sec).toString());
+    }
+    
 }
