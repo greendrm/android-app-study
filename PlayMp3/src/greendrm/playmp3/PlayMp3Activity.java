@@ -14,6 +14,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class PlayMp3Activity extends Activity {
+	private static final boolean DEBUG = true;
 	private static final String TAG = "PlayMp3";
 	MediaPlayer audio_play = null;
 	final String sampleMp3 = 
@@ -22,7 +23,7 @@ public class PlayMp3Activity extends Activity {
 	TextView textviewStart, textviewStop;
 	Thread thread;
 	boolean isPlaying = false;
-	boolean isThreadTerminated = false;
+	boolean isThreadRunning = true;
 	
     /** Called when the activity is first created. */
     @Override
@@ -30,9 +31,14 @@ public class PlayMp3Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        if (DEBUG) Log.d(TAG, "onCreate()");
+        
         seekbar = (SeekBar)findViewById(R.id.seekBar1);
         textviewStart = (TextView)findViewById(R.id.textViewStart);
         textviewStop = (TextView)findViewById(R.id.textViewStop);
+
+        isPlaying = false;
+        isThreadRunning = true;
         
         UpdateProgress updateProgress = new UpdateProgress();
         thread = new Thread(updateProgress);
@@ -41,7 +47,9 @@ public class PlayMp3Activity extends Activity {
     
 	@Override
 	protected void onDestroy() {
-		isThreadTerminated = true;
+		if (DEBUG) Log.d(TAG, "onDestroy()");
+		
+		isThreadRunning = false;
 		if (audio_play != null) {
 			try {
 				audio_play.stop();
@@ -149,7 +157,7 @@ public class PlayMp3Activity extends Activity {
     class UpdateProgress implements Runnable {
 		@Override
 		public void run() {
-			while (isThreadTerminated != false) {
+			while (isThreadRunning) {
 				if (audio_play != null) {
 					if (isPlaying) {
 						try {
@@ -175,11 +183,45 @@ public class PlayMp3Activity extends Activity {
     }
     
     public void setDuratinSeekBar(int duration) {
-    	double sec;
-    	sec = (double)duration / 1000.0;
+    	int sec;
+    	sec = duration / 1000;
     	
     	seekbar.setMax(duration);
-    	textviewStop.setText(new Double(sec).toString());
+    	textviewStop.setText(new Integer(sec).toString());
     }
     
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		if (DEBUG) Log.d(TAG, "onStart()");
+		super.onStart();
+	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		if (DEBUG) Log.d(TAG, "onRestart()");
+		super.onRestart();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		if (DEBUG) Log.d(TAG, "onResume()");
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		if (DEBUG) Log.d(TAG, "onPause()");
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		if (DEBUG) Log.d(TAG, "onStop()");
+		super.onStop();
+	}
 }
