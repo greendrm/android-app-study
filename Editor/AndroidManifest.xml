@@ -17,6 +17,7 @@
         </activity>
         
         <activity android:name=".EditorContents"/>
+        <activity android:name=".PreferencesActivity"/>
 
     </application>
 </manifest>

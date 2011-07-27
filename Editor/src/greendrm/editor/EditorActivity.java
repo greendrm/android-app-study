@@ -1,47 +1,75 @@
 package greendrm.editor;
 
 
-import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditorActivity extends Activity {
-	private final static String TAG = "Editor";
+	private static final boolean DEBUG = true;
+	private static final String TAG = "Editor";
 	private ListView list;
-	private ArrayList<String> files;
+	private ArrayList<String> items;
 	private ArrayAdapter<String> adapter;
+	
+	private String mSaveMethod = "sdcard";
+	
 	private final String mDirName = "김도집";
 	private String mTmpPath = null;
+	
+	private EditorFileSD mFileSD = null;
+	private EditorFileDatabase mDatabase = null;
+	
+	private TextView eMode1;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	if (DEBUG) Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        EditorFileSD fileSD = new EditorFileSD(mDirName);
+        mFileSD = new EditorFileSD(mDirName);
+        mDatabase = new EditorFileDatabase(this, "editor_db", 1);
+        items = new ArrayList<String>();
+        
+        eMode1 = (TextView)findViewById(R.id.textViewMode1);
         
         list = (ListView)findViewById(R.id.listView1);
-        files = new ArrayList<String>();
+        if (mSaveMethod.equals("db"))
+        	items = mDatabase.retreiveFiles(items);
+        else
+        	items = mFileSD.retreiveFiles(items);
+       
+        adapter = new ArrayAdapter<String>(this, R.layout.listrow, items);
+        list.setAdapter(adapter);
         
         // register the listener of list
         list.setOnItemClickListener(new OnItemClickListener() {
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view,
         			int position, long id) {
-        		EditorFileSD file = new EditorFileSD();
-        		String str = file.parseFileName(files.get(position).toString());
+        		String str;
+        		if (mSaveMethod.equals("db"))
+        			str = mDatabase.parseFileName(items.get(position).toString());
+        		else
+        			str = mFileSD.parseFileName(items.get(position).toString());
         		Intent intent = new Intent(getBaseContext(), EditorContents.class);
         		intent.putExtra("FILE_NAME", str);
         		startActivityForResult(intent, 0);
@@ -54,15 +82,21 @@ public class EditorActivity extends Activity {
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				mTmpPath = files.get(position);
+				mTmpPath = items.get(position);
 				
 				DialogInterface.OnClickListener deleteListener = 
 					new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						EditorFileSD file = new EditorFileSD();
-						file.deleteFile(file.parseFileName(mTmpPath));
-						updateFileList(file.parseFileName(mTmpPath), false);
+						if (mSaveMethod.equals("db")) {
+							mDatabase.deleteFile(mFileSD.parseFileName(mTmpPath));
+							items = mDatabase.retreiveFiles(items);
+						}
+						else {
+							mFileSD.deleteFile(mFileSD.parseFileName(mTmpPath));
+							items = mFileSD.retreiveFiles(items);
+						}
+						adapter.notifyDataSetChanged();
 					}
 				};
 				
@@ -83,30 +117,37 @@ public class EditorActivity extends Activity {
 				
 				return false;
 			}
-        	
         });
-
-        // update the list of files
-	    File baseDir = fileSD.getBaseDir();
-        File[] fs = baseDir.listFiles();
-        
-        files.clear();
-        for (int i = fs.length - 1; i >= 0; i--) {
-        	files.add(fs[i].getPath());
-        }
-        
-        adapter = new ArrayAdapter<String>(this, R.layout.listrow, files);
-        list.setAdapter(adapter);
     }
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		EditorFileSD file = new EditorFileSD();
-		file.setBaseDir(null);
+		mFileSD.setBaseDir(null);
 		super.onDestroy();
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem itemSetting = menu.add(0, 0, Menu.NONE, "Preferences");
+		MenuItem itemRem = menu.add(0, 1, Menu.NONE, "Exit");
+		itemSetting.setIcon(android.R.drawable.ic_menu_preferences);
+		itemRem.setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+		return super.onCreateOptionsMenu(menu);
+	}
     
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case 0:
+			startActivity(new Intent(this, PreferencesActivity.class));
+			break;
+		case 1:
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
     public void onClickAddFile(View v) {
 		Intent intent = new Intent(getBaseContext(), EditorContents.class);
 		startActivityForResult(intent, 0);
@@ -119,33 +160,47 @@ public class EditorActivity extends Activity {
     			+ "(" + Activity.RESULT_OK + ")");
     	if (requestCode == 0) {
     		if (resultCode == Activity.RESULT_OK) {
-    			String fileName = data.getStringExtra("FILE_NAME");
-    			String mode = data.getStringExtra("FILE_ACTION");
-    			updateFileList(fileName, mode.equals("ADD"));
+    			if (mSaveMethod.equals("db"))
+    				items = mFileSD.retreiveFiles(items);
+    			else
+    				items = mFileSD.retreiveFiles(items);
+    			adapter.notifyDataSetChanged();
     		}
     	}
     	super.onActivityResult(requestCode, resultCode, data);
     }
     
-    public void updateFileList(String fileName, boolean isAdd) {
-		EditorFileSD fileSD = new EditorFileSD();
-	    File baseDir = fileSD.getBaseDir();
-        File file = new File(baseDir, fileName);
-        String fullPath = file.getPath();
-        int i = 0;
+    @Override
+    protected void onResume() {
+    	if (DEBUG) Log.d(TAG, "onResume");
+        super.onResume();
         
-        for (i = 0; i < files.size(); i++) {
-        	Log.d(TAG, files.get(i) + ", " + fullPath);
-        	if (files.get(i).equals(fullPath)) {
-        		Log.d(TAG, "exist matched file");
-        		if (isAdd == false)
-        			files.remove(i);
-        		break;
-        	}
+        retrivePreferences();
+
+        if (mSaveMethod.equals("db")) {
+        	items = mDatabase.retreiveFiles(items);
         }
-    	if (i == files.size() && isAdd)
-    		files.add(fullPath);
-    	
-    	adapter.notifyDataSetChanged();
+        else if (mSaveMethod.equals("sdcard")) {
+        	items = mFileSD.retreiveFiles(items);
+        }
+        else {
+        	mSaveMethod = "sdcard";
+        	Log.w(TAG, mSaveMethod + " : Not yet supported");
+        	//Toast.makeText(this, "Not yet supported.\n", Toast.LENGTH_LONG);
+        	items = mFileSD.retreiveFiles(items);
+        }
+        adapter.notifyDataSetChanged();
+        
+        if (DEBUG) Log.d(TAG, "onResume: " + mSaveMethod );
+        eMode1.setText(mSaveMethod);
     }
+    
+    private void retrivePreferences() {
+        SharedPreferences prefs = PreferenceManager.
+            getDefaultSharedPreferences(getApplicationContext());
+        
+        mSaveMethod = prefs.getString("saveMethod", "sdcard");
+        if (DEBUG) Log.d(TAG, "save method: " + mSaveMethod);
+    }
+
 }

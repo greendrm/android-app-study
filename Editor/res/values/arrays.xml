@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="save_method">
+		<item>Context</item>
+		<item>Cache</item>
+		<item>SD Card</item>
+		<item>Database</item>
+	</string-array>
+
+	<string-array name="save_method_values">
+		<item>context</item>
+	    <item>cache</item>
+	    <item>sdcard</item>
+	    <item>db</item>
+	</string-array>
+</resources>

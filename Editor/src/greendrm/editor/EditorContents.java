@@ -2,33 +2,53 @@ package greendrm.editor;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class EditorContents extends Activity {
-
-	private final static String TAG = "EditorContents";
+	private static final boolean DEBUG = true;
+	private static final String TAG = "EditorContents";
 	private EditText editFile;
 	private EditText editContents;
 	private boolean isAdd = false;
+	
+	private EditorFileSD mFileSD = null;
+	private EditorFileDatabase mDatabase = null;
+	
+	private static String mSaveMethod = "sdcard";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.editor);
-		EditorFileSD file = new EditorFileSD();
+		mFileSD = new EditorFileSD();
+		mDatabase = new EditorFileDatabase();
+		String data;
+		
+		retrivePreferences();
 		
 		editFile = (EditText)findViewById(R.id.editNewFile);
 		editContents = (EditText)findViewById(R.id.editContents);
+		TextView eMode2 = (TextView)findViewById(R.id.textViewMode2);
+		eMode2.setText(mSaveMethod);
 		
 		Intent extra = getIntent();
 		String filename = extra.getStringExtra("FILE_NAME");
-		editFile.setText(file.parseFileNameNoExt(filename));
+		if (mSaveMethod.equals("db"))
+			editFile.setText(filename);
+		else
+			editFile.setText(mFileSD.parseFileNameNoExt(filename));
 		
+		if (mSaveMethod.equals("db"))
+			data = mDatabase.loadFile(filename);
+		else
+			data = mFileSD.loadFile(filename);
 		
-		String data = file.loadFile(filename);
 		if (data != null)
 			editContents.setText(data);
 	}
@@ -36,31 +56,44 @@ public class EditorContents extends Activity {
 	@Override
 	protected void onPause() {
 		Log.d(TAG, "onPause()");
-		EditorFileSD fileSD = new EditorFileSD();
-		String filename = editFile.getText().toString() + ".txt";
+		String filename = editFile.getText().toString();
 		if (isAdd) {
 			String data = editContents.getText().toString();
-			fileSD.createFile(filename);
-			fileSD.saveFile(filename, data);
+			if (mSaveMethod.equals("db")) {
+				mDatabase.deleteFile(filename);
+				mDatabase.saveFile(filename, data);
+			}
+			else {
+				mFileSD.createFile(filename+".txt");
+				mFileSD.saveFile(filename+".txt", data);
+			}
 		}
 		else {
-			fileSD.deleteFile(filename);
-			//fileSD.deleteFile(fileSD.parseFileNameNoExt(filename));
+			if (mSaveMethod.equals("db"))
+				mDatabase.deleteFile(filename);
+			else
+				mFileSD.deleteFile(filename+".txt");
 		}
 		super.onPause();
 	}
 	
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
 		//super.onBackPressed();
-		isAdd = true;
+
 		
 		Intent data = new Intent();
-		String fileName = editFile.getText().toString() + ".txt";
-		data.putExtra("FILE_NAME", fileName);
-		data.putExtra("FILE_ACTION", "ADD");
-		setResult(Activity.RESULT_OK, data);
+		if (DEBUG) Log.d(TAG, "onBackPressed:" + editFile.getText().toString().length());
+		if (editFile.getText().toString().length() != 0) {
+			if (DEBUG) Log.d(TAG, "onBackPressed: will be saved");
+			isAdd = true;
+			setResult(Activity.RESULT_OK, data);
+		}
+		else {
+			if (DEBUG) Log.d(TAG, "onBackPressed: will be discarded");
+			isAdd = false;
+			setResult(Activity.RESULT_CANCELED, data);
+		}
 		finish();
 	}
 
@@ -69,11 +102,16 @@ public class EditorContents extends Activity {
 		isAdd = false;
 		
 		Intent data = new Intent();
-		String fileName = editFile.getText().toString() + ".txt";
-		data.putExtra("FILE_NAME", fileName);
-		data.putExtra("FILE_ACTION", "DELETE");
 		setResult(Activity.RESULT_OK, data);
 		
 		finish();
 	}
+	
+    private void retrivePreferences() {
+        SharedPreferences prefs = PreferenceManager.
+            getDefaultSharedPreferences(getApplicationContext());
+        
+        mSaveMethod = prefs.getString("saveMethod", "sdcard");
+        if (DEBUG) Log.d(TAG, "save method: " + mSaveMethod);
+    }
 }

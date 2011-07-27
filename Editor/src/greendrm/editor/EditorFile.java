@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.util.Log;
 
@@ -140,5 +141,15 @@ public class EditorFile {
     		return tmps[0];
     	}
     	return null;
+    }
+    
+    public ArrayList<String> retreiveFiles(ArrayList<String> items) {
+        File[] fs = baseDir.listFiles();
+        
+        items.clear();
+        for (int i = fs.length - 1; i >= 0; i--) {
+        	items.add(fs[i].getPath());
+        }
+        return items;
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+			android:key="saveMethod"
+			android:title="파일 저장 위치 선택"
+			android:summary="파일 저장 위치를 선택합니다"
+			android:entries="@array/save_method"
+			android:entryValues="@array/save_method_values"
+			android:defaultValue="sdcard" />
+</PreferenceScreen>
