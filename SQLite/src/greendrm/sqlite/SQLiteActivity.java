@@ -143,7 +143,7 @@ public class SQLiteActivity extends ListActivity {
     		onCreate(db);
     	}
     	public void insertData(Person person) {
-    		SQLiteDatabase db = getReadableDatabase();
+    		SQLiteDatabase db = getWritableDatabase();
     		String insertMe = "INSERT INTO " + DATABASE_TABLE
     		+ "(lastname, firstname, country, age) " + "VALUES ";
     		db.execSQL(insertMe + "('" + person.lastname + "'," + "'"
