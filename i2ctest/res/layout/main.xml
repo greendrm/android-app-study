@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+    <LinearLayout android:id="@+id/linearLayout2" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content" android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:text="REG: "></TextView>
+        <EditText android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/editTextReg" android:layout_width="fill_parent"></EditText>
+        <TextView android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:layout_weight="0" android:text=" VAL: " android:id="@+id/textView2"></TextView>
+        <EditText android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/editTextVal" android:layout_width="fill_parent">
+            <requestFocus></requestFocus>
+        </EditText>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout4" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:gravity="bottom">
+        <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="none" android:id="@+id/editTextConsole" android:cursorVisible="false" android:focusable="false" android:gravity="top|left" android:scrollbars="vertical"></EditText>
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <Button android:layout_width="wrap_content" android:text="Read" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/buttonRead" android:onClick="onClickRead"></Button>
+            <Button android:layout_width="wrap_content" android:text="Write" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/buttonWrite" android:onClick="onClickWrite"></Button>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

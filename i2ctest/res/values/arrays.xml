@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="i2c_master_offset">
+        <item>0x00</item>
+        <item>0x0C</item>
+        <item>0x18</item>
+        <item>0x24</item>
+        <item>0x30</item>
+        <item>0x40</item>
+    </integer-array>
+</resources>
