@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".EditorContents"/>
+        <activity android:name=".EditorContentsActivity"/>
         <activity android:name=".PreferencesActivity"/>
 
     </application>

@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class EditorContents extends Activity {
+public class EditorContentsActivity extends Activity {
 	private static final boolean DEBUG = true;
 	private static final String TAG = "EditorContents";
 	private EditText editFile;
 	private EditText editContents;
 	private boolean isAdd = false;
 	
+	private IEditorFile mFile = null;
 	private EditorFileSD mFileSD = null;
 	private EditorFileDatabase mDatabase = null;
 	
@@ -32,6 +33,11 @@ public class EditorContents extends Activity {
 		
 		retrivePreferences();
 		
+		if (mSaveMethod.equals("db"))
+			mFile = mDatabase;
+		else
+			mFile = mFileSD;
+		
 		editFile = (EditText)findViewById(R.id.editNewFile);
 		editContents = (EditText)findViewById(R.id.editContents);
 		TextView eMode2 = (TextView)findViewById(R.id.textViewMode2);
@@ -39,15 +45,9 @@ public class EditorContents extends Activity {
 		
 		Intent extra = getIntent();
 		String filename = extra.getStringExtra("FILE_NAME");
-		if (mSaveMethod.equals("db"))
-			editFile.setText(filename);
-		else
-			editFile.setText(mFileSD.parseFileNameNoExt(filename));
+		editFile.setText(mFile.parseFileNameNoExt(filename));
 		
-		if (mSaveMethod.equals("db"))
-			data = mDatabase.loadFile(filename);
-		else
-			data = mFileSD.loadFile(filename);
+		data = mFile.loadFile(filename);
 		
 		if (data != null)
 			editContents.setText(data);

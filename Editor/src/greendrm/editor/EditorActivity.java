@@ -34,6 +34,7 @@ public class EditorActivity extends Activity {
 	private final String mDirName = "김도집";
 	private String mTmpPath = null;
 	
+	private IEditorFile mFile = null;
 	private EditorFileSD mFileSD = null;
 	private EditorFileDatabase mDatabase = null;
 	
@@ -49,13 +50,15 @@ public class EditorActivity extends Activity {
         mDatabase = new EditorFileDatabase(this, "editor_db", 1);
         items = new ArrayList<String>();
         
+        if (mSaveMethod.equals("db"))
+        	mFile = mFileSD;
+        else
+        	mFile = mDatabase;
+        
         eMode1 = (TextView)findViewById(R.id.textViewMode1);
         
         list = (ListView)findViewById(R.id.listView1);
-        if (mSaveMethod.equals("db"))
-        	items = mDatabase.retreiveFiles(items);
-        else
-        	items = mFileSD.retreiveFiles(items);
+        items = mFile.retreiveFiles(items);
        
         adapter = new ArrayAdapter<String>(this, R.layout.listrow, items);
         list.setAdapter(adapter);
@@ -66,11 +69,8 @@ public class EditorActivity extends Activity {
         	public void onItemClick(AdapterView<?> parent, View view,
         			int position, long id) {
         		String str;
-        		if (mSaveMethod.equals("db"))
-        			str = mDatabase.parseFileName(items.get(position).toString());
-        		else
-        			str = mFileSD.parseFileName(items.get(position).toString());
-        		Intent intent = new Intent(getBaseContext(), EditorContents.class);
+        		str = mFile.parseFileName(items.get(position).toString());
+        		Intent intent = new Intent(getBaseContext(), EditorContentsActivity.class);
         		intent.putExtra("FILE_NAME", str);
         		startActivityForResult(intent, 0);
         	}
@@ -88,14 +88,8 @@ public class EditorActivity extends Activity {
 					new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (mSaveMethod.equals("db")) {
-							mDatabase.deleteFile(mFileSD.parseFileName(mTmpPath));
-							items = mDatabase.retreiveFiles(items);
-						}
-						else {
-							mFileSD.deleteFile(mFileSD.parseFileName(mTmpPath));
-							items = mFileSD.retreiveFiles(items);
-						}
+						mFile.deleteFile(mFile.parseFileName(mTmpPath));
+						items = mFile.retreiveFiles(items);
 						adapter.notifyDataSetChanged();
 					}
 				};
@@ -122,7 +116,7 @@ public class EditorActivity extends Activity {
 	
 	@Override
 	protected void onDestroy() {
-		mFileSD.setBaseDir(null);
+		EditorFileSD.setBaseDir(null);
 		super.onDestroy();
 	}
 	
@@ -149,7 +143,7 @@ public class EditorActivity extends Activity {
 	}
 	
     public void onClickAddFile(View v) {
-		Intent intent = new Intent(getBaseContext(), EditorContents.class);
+		Intent intent = new Intent(getBaseContext(), EditorContentsActivity.class);
 		startActivityForResult(intent, 0);
     }
     
@@ -160,10 +154,7 @@ public class EditorActivity extends Activity {
     			+ "(" + Activity.RESULT_OK + ")");
     	if (requestCode == 0) {
     		if (resultCode == Activity.RESULT_OK) {
-    			if (mSaveMethod.equals("db"))
-    				items = mFileSD.retreiveFiles(items);
-    			else
-    				items = mFileSD.retreiveFiles(items);
+    			items = mFile.retreiveFiles(items);
     			adapter.notifyDataSetChanged();
     		}
     	}
@@ -178,17 +169,17 @@ public class EditorActivity extends Activity {
         retrivePreferences();
 
         if (mSaveMethod.equals("db")) {
-        	items = mDatabase.retreiveFiles(items);
+        	mFile = mDatabase;
         }
         else if (mSaveMethod.equals("sdcard")) {
-        	items = mFileSD.retreiveFiles(items);
+        	mFile = mFileSD;
         }
         else {
         	mSaveMethod = "sdcard";
         	Log.w(TAG, mSaveMethod + " : Not yet supported");
-        	//Toast.makeText(this, "Not yet supported.\n", Toast.LENGTH_LONG);
-        	items = mFileSD.retreiveFiles(items);
+        	mFile = mFileSD;
         }
+        items = mFile.retreiveFiles(items);
         adapter.notifyDataSetChanged();
         
         if (DEBUG) Log.d(TAG, "onResume: " + mSaveMethod );

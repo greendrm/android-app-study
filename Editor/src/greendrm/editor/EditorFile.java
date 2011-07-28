@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-public class EditorFile {
+public class EditorFile implements IEditorFile {
 	private final static boolean DEBUG = true;
 	private final static String TAG = "EditorFile";
 	protected static File baseDir = null;
 	
-	public void setBaseDir(File dir) {
+	public static void setBaseDir(File dir) {
 		baseDir = dir;
 	}
 	

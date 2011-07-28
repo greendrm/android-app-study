@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class EditorFileDatabase extends SQLiteOpenHelper {
+public class EditorFileDatabase extends SQLiteOpenHelper implements IEditorFile {
 	private final static boolean DEBUG = true;
 	private final static String TAG = "EditorFileDatabase";
 	
