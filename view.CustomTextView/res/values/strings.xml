@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">My Custom TextView</string>
+	<string name="mydroid_text">안드로이드 텍스트 뷰의 정렬입니다. 글자가 넘칠까요 http://gtko.tistory.com에서 gtko@hanmail.com 을 만나세요</string>
+	<string name="mydroid_autolink">자동으로 링크 777-999-9999와 hong@mydomain.com</string>
+	<string name="here_document">here codument는 I/O 재지향의 특별한 형태로서, ftp나 telnet, ex처럼 사용자와 입력을 주고 받는(interactive) 프로그램에게 명령어 스크립트를 입력시키는데 쓰입니다. 프로그램의 입력으로 쓸 명령어 리스트들로 이루어진 스크립트는 보통 제한 문자열(limit string)로 표현됩니다. 특별한 심볼인 &gt;&gt; 뒤에 제한 문자열을 적어 줍니다</string>
+</resources>
