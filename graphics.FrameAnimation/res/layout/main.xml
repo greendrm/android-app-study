@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<ImageView android:id="@+id/image_frame"
+android:layout_width="100dip"
+android:layout_height="100dip"
+android:src="@anim/frame" />
+<Button android:id="@+id/button_frame_start"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Start Frame" />
+<Button android:id="@+id/button_frame_stop"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Stop Frame" />
+<Button android:id="@+id/button1"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Start alpha" />
+<Button android:id="@+id/button2"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Start rotate" />
+<Button android:id="@+id/button3"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Start scale" />
+<Button android:id="@+id/button4"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Start translate" />
+<Button android:id="@+id/button5"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Start set" />
+</LinearLayout>
