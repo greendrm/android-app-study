@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout1" android:layout_width="match_parent">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:text="결과: "></TextView>
+        <TextView android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_toRightOf="@+id/textView1" android:id="@+id/textViewSum"></TextView>
+        <TextView android:layout_width="wrap_content" android:text="클릭수: " android:layout_height="wrap_content" android:id="@+id/textView3" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:layout_marginRight="55dp"></TextView>
+        <TextView android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/textViewCount" android:layout_alignParentTop="true" android:layout_alignParentRight="true"></TextView>
+    </RelativeLayout>
+    <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout2" android:layout_width="match_parent">
+        <Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:text="계산"></Button>
+        <Button android:id="@+id/button2" android:text="클릭" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:layout_marginRight="57dp"></Button>
+    </RelativeLayout>
+</LinearLayout>
