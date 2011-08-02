@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="false">
+	<item android:drawable="@drawable/crown_01" android:duration="500"/>
+	<item android:drawable="@drawable/crown_02" android:duration="500"/>
+	<item android:drawable="@drawable/crown_03" android:duration="500"/>
+	<item android:drawable="@drawable/crown_04" android:duration="500"/>
+	<item android:drawable="@drawable/crown_05" android:duration="500"/>
+	<item android:drawable="@drawable/crown_06" android:duration="500"/>
+	<item android:drawable="@drawable/crown_07" android:duration="500"/>
+	<item android:drawable="@drawable/crown_08" android:duration="500"/>
+	<item android:drawable="@drawable/crown_09" android:duration="500"/>
+	<item android:drawable="@drawable/crown_10" android:duration="500"/>
+	<item android:drawable="@drawable/crown_11" android:duration="500"/>
+	<item android:drawable="@drawable/crown_12" android:duration="500"/>
+</animation-list>
