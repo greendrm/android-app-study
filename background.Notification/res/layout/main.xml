@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		>
+	<TextView
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:layout_marginBottom="5dp"
+			android:text="Notification이 상태바에 나타납니다."
+	/>
+	<Button android:id="@+id/notify"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text="축구공 알림이 2초후 시작합니다."
+			/>
+	<Button android:id="@+id/cancel"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text="알림을 취소합니다."
+			/>
+</LinearLayout>
