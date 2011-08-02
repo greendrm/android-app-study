@@ -24,7 +24,7 @@ public class UsbTest extends Activity {
 	private static final boolean DEBUG = true;
 	private static final String TAG = "USB"; 
 	
-	private static final String ACTION_USB_PERMISSION = "greendrm.android.usbtest";
+	private static final String ACTION_USB_PERMISSION = "greendrm.android.usbtest.USBPERMISSION";
 	private UsbAccessory mAccessory = null;
 	private Button mBtSend = null;
 	
@@ -44,7 +44,8 @@ public class UsbTest extends Activity {
         if (DEBUG) Log.d(TAG, "onCreate()");
         
         mUsbManager = UsbManager.getInstance(this);
-        mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent("ch.serverbox.android.usbtest.USBPERMISSION"),0);
+        mPermissionIntent = PendingIntent.getBroadcast(this, 0, 
+        		new Intent(ACTION_USB_PERMISSION),0);
         
         IntentFilter i = new IntentFilter();
         //i.addAction(UsbManager.ACTION_USB_ACCESSORY_ATTACHED);
