@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Exam MapLocation</string>
+    <string name="alert_title">경고 타이틀</string>
+    <string name="alert_message">경고 메시지</string>
+</resources>

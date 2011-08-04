@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:gravity="center_horizontal" 
+		android:padding="10px"
+		android.setVerticalScrollBarEnabled="true" android:background="#000000">
+
+	<include android:id="@+id/button_layout" layout="@layout/buttons_layout" />
+
+ 	<com.google.android.maps.MapView android:id="@+id/map" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+	    android:layout_below="@id/btnlayout"
+	 	android:apiKey="0t8kMofBHPc6TylVEAYLUaDaEUFriB-oKXSEJTA"
+		android:enabled="true"
+        android:clickable="true"/>
+</RelativeLayout>
