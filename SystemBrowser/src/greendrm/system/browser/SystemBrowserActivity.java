@@ -1,3 +1,19 @@
+/* 
+ * Copyright 2011 Dojip Kim
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package greendrm.system.browser;
 
 import java.io.File;
@@ -16,6 +32,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,6 +50,18 @@ public class SystemBrowserActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         browseToRoot();
+        
+        ListView lv = getListView();
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View v,
+					int pos, long id) {
+				onListItemLongClick(getListView(), v, pos, id);
+				return false;
+			}
+		
+        });
     }
     
 	@Override
@@ -60,6 +89,11 @@ public class SystemBrowserActivity extends ListActivity {
     
     private void browseTo(final File aDirectory) {
     	// On relative we display the full path in the title.
+    	if (aDirectory.canRead() == false) {
+			Toast.makeText(this, "Can not access", Toast.LENGTH_SHORT).show();
+			return;
+		}
+    	
     	if (this.displayMode == DISPLAYMODE.RELATIVE)
     		this.setTitle(aDirectory.getAbsolutePath());
     	if (aDirectory.isDirectory()) {
@@ -69,15 +103,16 @@ public class SystemBrowserActivity extends ListActivity {
     	else {
     		DialogInterface.OnClickListener okButtonListener = new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface diaglog, int which) {
-					// Lets start an intent to View the file, that was clicked..
-					SystemBrowserActivity.this.openFile(aDirectory);
-				}
+    			@Override
+    			public void onClick(DialogInterface diaglog, int which) {
+    				// Lets start an intent to View the file, that was clicked..
+    				SystemBrowserActivity.this.openFile(aDirectory);
+    			}
     		};
     		DialogInterface.OnClickListener cancelButtonListener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					SystemBrowserActivity.this.setTitle(SystemBrowserActivity.this.currentDirectory.getAbsolutePath());
 					dialog.dismiss();
 				}
     		};
@@ -111,12 +146,6 @@ public class SystemBrowserActivity extends ListActivity {
     }
     
     private void fill(File[] files) {
-    	if (files == null) {
-    		Toast.makeText(this, "Can not access", Toast.LENGTH_SHORT).show();
-    		upOneLevel();
-    		return;
-    	}
-    	
     	this.directoryEntries.clear();
     	
     	// Add the "." == "current directory"
@@ -212,7 +241,35 @@ public class SystemBrowserActivity extends ListActivity {
 				this.browseTo(clickedFile);
 		}
 	}
-
+	
+	protected void onListItemLongClick(ListView l, View v, int position, long id) {
+		String selectedFileString = this.directoryEntries.get(position)
+		.getText();
+		
+		if (selectedFileString.equals(getString(R.string.current_dir))) {
+		} else if (selectedFileString.equals(getString(R.string.up_one_level))) {
+		} else {
+			File clickedFile = null;
+			switch (this.displayMode) {
+				case RELATIVE:
+					clickedFile = new File(this.currentDirectory
+							.getAbsolutePath()
+							+ this.directoryEntries.get(position)
+									.getText());
+					break;
+				case ABSOLUTE:
+					clickedFile = new File(this.directoryEntries.get(
+							position).getText());
+					break;
+			}
+			if (clickedFile != null) {
+				Intent intent = new Intent(getBaseContext(), OptionsActivity.class);
+				if (DEBUG) Log.d(TAG, "clickedFile: " + clickedFile);
+				intent.putExtra(OptionsActivity.PARAMS_FILENAME, clickedFile.getAbsolutePath());
+				startActivity(intent);
+			}
+		}
+	}
      /** Checks whether checkItsEnd ends with
       * one of the Strings from fileEndings */
      private boolean checkEndsWithInStringArray(String checkItsEnd,

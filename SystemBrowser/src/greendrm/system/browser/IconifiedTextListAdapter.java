@@ -1,12 +1,12 @@
-/* $Id: BulletedTextListAdapter.java 57 2007-11-21 18:31:52Z steven $
- * 
+/* 
  * Copyright 2007 Steven Osborn
+ * Copyright 2011 Dojip Kim
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      <!-- m --><a class="postlink" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><!-- m -->
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,11 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-/** @author Steven Osborn - <!-- m --><a class="postlink" href="http://steven.bitsetters.com">http://steven.bitsetters.com</a><!-- m --> */
 public class IconifiedTextListAdapter extends BaseAdapter {
 
 	/** Remember our context so we can use it when constructing views. */
@@ -51,7 +53,6 @@ public class IconifiedTextListAdapter extends BaseAdapter {
 		try{
 			return mItems.get(position).isSelectable();
 		}catch (IndexOutOfBoundsException aioobe){
-			//return super.isSelectable(position);
 			return super.isEnabled(position);
 		}
 	}
@@ -64,15 +65,24 @@ public class IconifiedTextListAdapter extends BaseAdapter {
 	/** @param convertView The old view to overwrite, if one is passed
 	 * @returns a IconifiedTextView that holds wraps around an IconifiedText */
 	public View getView(int position, View convertView, ViewGroup parent) {
-		IconifiedTextView btv;
+		ViewHolder holder;
 		if (convertView == null) {
-			btv = new IconifiedTextView(mContext, mItems.get(position));
+			LayoutInflater inflater = LayoutInflater.from(mContext);
+			convertView = inflater.inflate(R.layout.iconified_text_list, parent, false);
+			holder = new ViewHolder();
+			holder.icon = (ImageView)convertView.findViewById(R.id.imageView_icon);
+			holder.text = (TextView)convertView.findViewById(R.id.textView_filename);
+			convertView.setTag(holder);
 		} else { // Reuse/Overwrite the View passed
-			// We are assuming(!) that it is castable! 
-			btv = (IconifiedTextView) convertView;
-			btv.setText(mItems.get(position).getText());
-			btv.setIcon(mItems.get(position).getIcon());
+			holder = (ViewHolder)convertView.getTag();
 		}
-		return btv;
+		holder.icon.setImageDrawable(mItems.get(position).getIcon());
+		holder.text.setText(mItems.get(position).getText());
+		return convertView;
+	}
+	
+	static class ViewHolder {
+		ImageView icon;
+		TextView text;
 	}
 }

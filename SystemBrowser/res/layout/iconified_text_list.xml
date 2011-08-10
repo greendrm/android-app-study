@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:weightSum="1" android:orientation="horizontal">
+    <ImageView android:src="@drawable/audio" android:layout_width="20dp" android:layout_marginRight="5dp" android:id="@+id/imageView_icon" android:layout_height="20dp"></ImageView>
+    <TextView android:text="TextView" android:layout_height="wrap_content" android:id="@+id/textView_filename" android:layout_width="fill_parent" android:textSize="20dp"></TextView>
+    
+</LinearLayout>
