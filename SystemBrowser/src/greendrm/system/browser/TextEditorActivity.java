@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -39,7 +40,7 @@ public class TextEditorActivity extends Activity implements OnClickListener {
 
 	private File mFile;
 	private EditText mText;
-	private Button mButtonEdit;
+	private Button mButtonSave;
 	private Button mButtonExit;
 	
 	private boolean bEditable;
@@ -50,7 +51,7 @@ public class TextEditorActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.text_editor);
 		
 		mText = (EditText)findViewById(R.id.editText_text_editor);
-		mButtonEdit = (Button)findViewById(R.id.button_edit);
+		mButtonSave = (Button)findViewById(R.id.button_save);
 		mButtonExit = (Button)findViewById(R.id.button_exit);
 		
 		Intent extra = getIntent();
@@ -65,7 +66,7 @@ public class TextEditorActivity extends Activity implements OnClickListener {
 		mText.setText(s);
 		bEditable = false;
 		
-		mButtonEdit.setOnClickListener(this);
+		mButtonSave.setOnClickListener(this);
 		mButtonExit.setOnClickListener(this);
 	}
 
@@ -105,7 +106,7 @@ public class TextEditorActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	private void writeFile(File file, String data) {
+	private boolean writeFile(File file, String data) {
 		if (DEBUG) Log.d(TAG, "saveFile : " + file.getPath());
 		
 		if (file.exists() && file.canWrite()) {
@@ -125,27 +126,32 @@ public class TextEditorActivity extends Activity implements OnClickListener {
 			}
 		}
 		else {
+			Toast.makeText(this, "Can't write!", Toast.LENGTH_SHORT).show();
 			Log.d(TAG, "saveFile file is not exits or writable");
+			return false;
 		}
+		
+		return true;
 	}
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.button_edit:
-			bEditable = true;
-			break;
-		case R.id.button_exit:
+		case R.id.button_save:
 			if (bEditable) {
 				DialogInterface.OnClickListener okButtonListener = new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface diaglog, int which) {
-						//String s = mText.getText().toString();
-						//if (s.length() > 0)
-						//	writeFile(mFile, s);
-						Toast.makeText(getBaseContext(), "File saved", Toast.LENGTH_SHORT).show();
-						finish();
+						String s = mText.getText().toString();
+						boolean r = false;
+						if (s.length() > 0)
+							r = writeFile(mFile, s);
+						
+						if (r) {
+							bEditable = false;
+							Toast.makeText(getBaseContext(), "File saved", Toast.LENGTH_SHORT).show();
+						}
 					}
 				};
 				DialogInterface.OnClickListener cancelButtonListener = new DialogInterface.OnClickListener() {
@@ -162,6 +168,46 @@ public class TextEditorActivity extends Activity implements OnClickListener {
 				.show();
 			}
 			break;
+		case R.id.button_exit:
+			if (bEditable) {
+				DialogInterface.OnClickListener okButtonListener = new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface diaglog, int which) {
+						String s = mText.getText().toString();
+						boolean r = false;
+						if (s.length() > 0)
+							r = writeFile(mFile, s);
+						if (r) {
+							Toast.makeText(getBaseContext(), "File saved", Toast.LENGTH_SHORT).show();
+						}
+						finish();
+					}
+				};
+				DialogInterface.OnClickListener cancelButtonListener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						finish();
+					}
+				};
+				new AlertDialog.Builder(this)
+				.setTitle("Exit?")
+				.setNeutralButton("Save", okButtonListener)
+				.setNegativeButton("Discard", cancelButtonListener)
+				.setIcon(R.drawable.folder)
+				.show();
+			}
+			else {
+				finish();
+			}
+			break;
 		}
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		bEditable = true;
+		return super.onKeyUp(keyCode, event);
 	}
 }

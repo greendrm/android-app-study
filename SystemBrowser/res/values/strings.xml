@@ -8,6 +8,7 @@
     <string name="up_one_level">..</string>
     <string name="current_dir">.</string>
     <string name="options_edit">"Edit"</string>
+    <string name="options_hex">"Hex"</string>
     <string name="options_rename">"Rename"</string>
     <string name="options_delete">"Delete"</string>
     <string name="options_attribute">"Attribute"</string>

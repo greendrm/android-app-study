@@ -64,9 +64,10 @@ public class OptionsActivity extends Activity {
 		mList = (ListView)findViewById(R.id.listView_options);
 		options = new ArrayList<String>();
 		options.add(getString(R.string.options_edit));
+		options.add(getString(R.string.options_hex));
 		//options.add(getString(R.string.options_rename));
 		//options.add(getString(R.string.options_delete));
-		options.add(getString(R.string.options_attribute));
+		//options.add(getString(R.string.options_attribute));
 		adapter = new ArrayAdapter<String>(this, R.layout.list_item_1, options);
 		mList.setAdapter(adapter);
 		
@@ -79,6 +80,12 @@ public class OptionsActivity extends Activity {
 				
 				if (t.getText().equals(getString(R.string.options_edit))) {
 					Intent intent = new Intent(getBaseContext(), TextEditorActivity.class);
+					intent.putExtra(PARAMS_FILENAME, mFile.getAbsolutePath());
+					startActivity(intent);
+					finish();
+				}
+				if (t.getText().equals(getString(R.string.options_hex))) {
+					Intent intent = new Intent(getBaseContext(), HexEditorActivity.class);
 					intent.putExtra(PARAMS_FILENAME, mFile.getAbsolutePath());
 					startActivity(intent);
 					finish();
